@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+{% block title %}
+  Создание новой статьи
+{% endblock %}
+
+{% block content %}
+{% if perms.articles.add_article%}
+<form  method="post" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}><!--enctype для успешной отправки файла-->
+  {% csrf_token %}
+  <table border=0> <tr><td class="wi">
+              Заголовок
+              {{ form.title }}</td>
+        </tr>
+        <tr>
+            <td>
+              {{ form.text }}
+              {{ form.media }}
+            </td>
+        </tr>
+        <tr> <td>Область распространения:
+            {{ form.domain }}</td>
+        </tr>
+        <tr> <td>Картинка анонса:
+            {{ form.image }}</td>
+        </tr>
+        <tr> <td>Теги(писать через запятую):
+            {{ form.tags }}</td>
+        </tr>
+    </table>
+    <a href="/"><button class="btn btn-danger">Назад</button></a>
+    <button class="btn btn-primary">Добавить</button>
+</form>
+{% else %}
+  <h1>Недостаточно прав, для совершения данной операции</h1>
+{% endif %}
+{% endblock %}

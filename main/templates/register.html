@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title%}
+  Регистрация
+{% endblock %}
+
+{% block content%}
+  <h1>Регистрация пользователя</h1>
+  <form method="post">
+    {% csrf_token %}
+      <TABLE border=0>
+        <TR> <TD><input id="id_username" name="username" type="text" placeholder="Имя пользователя"></TD>
+          <td><span class="helptext">Имя пользователя должно содержать символы алфавита</td>
+        </TR>
+        <TR> <TD><input id="id_password1" name="password1" type="password" placeholder="Пароль"></td>
+          <td><span class="helptext">Пароль должен быть не короче 8 символов и обязательно должен содержать символы</td>
+        </TR>
+        <TR> <TD><input id="id_password2" name="password2" type="password" placeholder="Повторите пароль"></td>
+        </tr>
+        </table>
+    <input type="submit" value="Зарегистрироваться">
+  </form>
+{%endblock%}

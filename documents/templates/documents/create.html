@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+  Добавление нового документа
+{% endblock %}
+
+{% block content %}
+<form  method="post" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}><!--enctype для успешной отправки файла-->
+  {% csrf_token %}
+  <table border=0> <tr><td>Заголовок:</td>
+            <td>{{ form.title }}</td>
+        </tr><tr><td>Описание документа:</td>
+            <td>{{ form.desctiption }}</td>
+        </tr><tr> <td>Теги: </td>
+            <td>{{ form.tags }}</td>
+        </tr>
+        <tr> <td>Тип документа: </td>
+            <td>{{ form.document_type }}</td>
+        </tr>
+        <tr> <td>Документ: </td>
+            <td>{{ form.fiel }}</td>
+        </tr>
+        <tr> <td>Ключевые слова(через запятую): </td>
+            <td>{{ form.tags }}</td>
+        </tr>
+        <tr> <td><button class="btn btn-primary">Добавить документ</button></td>
+        </tr>
+        <tr> <td><a href="/"><button class="btn btn-danger">Назад</button></a></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ new.title }}
+{% endblock %}
+
+{% block content %}
+  <div class="for_group">
+    {% if perms.news.change_new%}
+      <a href="{% url "updatenew" new_id=new.id%}"><button class="btn">Изменить</button></a>
+    {% endif %}
+    {% if perms.news.delete_new%}
+      <a href="{% url "delnew" pk=new.id%}"><button class="btn">Удалить</button></a>
+    {% endif %}
+  </div>
+
+  <div class="detail">
+    <h1>{{ new.title }}</h1>
+    <div class="attribute">
+      <div class="attribute__like">{% if user.is_authenticated%}<a href="{% url "addlike" new_id=new.id %}">{% endif %}<button style="box-shadow: -2px -2px #bacfef;">Нравится</button></a>
+        <button style="box-shadow: -2px -2px #bacfef;">{{ new.like }}</button>
+      </div>
+    </div>
+    <p>{% autoescape off %}{{ new.text }}{% endautoescape %}</p>
+  </div>
+
+{% endblock %}

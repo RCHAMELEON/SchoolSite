@@ -1,0 +1,67 @@
+ <! DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<html lang="ru" class="document">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static "style_bem.css"%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "slick/slick.css"%}">
+    <link rel="stylesheet" href="{% static "slick/slick-theme.css"%}">
+	<title>{%block title%} {% endblock %}</title>
+</head>
+
+
+    <header class="header">
+        <div class="container">
+            <a href="{% url "index" %}"><img class="header__logo" src="{% static "logo.jpg" %}">
+            <menu class="navigation navigation_header">
+                <li class="navigation__item"><a class="navigation__item-link" href="{% url "news" %}">Новости</a></li>
+                <li class="navigation__item"><a class="navigation__item-link" href="{% url "education" type_article="Сведения" %}">Сведения</a></li>
+                <li class="navigation__item"><a class="navigation__item-link" href="{% url "list" %}">Документы</a></li>
+                <li class="navigation__item"><a class="navigation__item-link" href="{% url "education" type_article="Образование" %}">Образование</a></li>
+                <li class="navigation__item"><a class="navigation__item-link" href="{% url "education" type_article="Выпускникам"%}">Выпускникам</a></li>
+                {% if user.is_authenticated %}
+                  <li class="navigation__item"><a class="navigation__item-link" href="{% url "bar" %}">
+                      {{ user.get_username }}
+                  </a></li>
+                    {% else %}
+                    <li class="navigation__item"><a class="navigation__item-link" href="{% url "login" %}">Войти</a></li>
+                {% endif %}
+            </menu>
+
+			<div class="header__feedback">
+                <label class="header__telephone-number header__telephone-number_bold" ><b>8 (416) 36-21-2-04</b></label>
+                <br/>
+                <button type="subbmit" class="header__button">Телефон директора</button>
+            </div>
+        </div>
+    </header>
+
+
+	<div class="board screen_bg_gray">
+		<div class="container">
+			{% block content%}
+
+			{% endblock %}
+		</div>
+	</div>
+  <footer class="footer">
+    <div class="dnevnik">
+          <a target="_blank" href="http://schools.dnevnik.ru/school.aspx?school=1000000665367"><img class="dnevnik__logo" src="{% static "dnevnik.png" %}"></a>
+    </div>
+    <div class="hot_line">
+        <h4>Телефон горячей линии 8-800-250-03-22</h4>
+    </div>
+    <div class="split"></div>
+    <div class="minobr">
+        <a target="_blank" href="http://obramur.ru"><h4>Министерство образования</h4></a>
+    </div><div class="split"></div>
+    <div class="minobr">
+        <a target="_blank" href="http://roozavitinsk.3dn.ru"><h4>Городской Отдел образования</h4></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

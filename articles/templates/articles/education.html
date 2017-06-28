@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Образование
+{% endblock %}
+
+
+{% block content %}
+    {% for i in education%}
+      <div>
+        <h3><a class="navigation__item-link" href="{% url "article" art_id=i.id%}">{{ i.title }}</a></h3>
+        <p>{% autoescape off %}{{ i.anons_text }}{% endautoescape %}</p>
+      </div><hr/>
+    {% endfor %}
+{% endblock %}

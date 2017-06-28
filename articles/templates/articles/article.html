@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block title %}
+  {{ article.title }}
+{% endblock %}
+
+{% block content %}
+<div class="for_moderator">
+  {% if perms.articles.change_article%}
+    <a href="{% url "updatearticle" art_id=article.id%}">
+      <button class="btn">Изменить</button></a>
+  {% endif %}
+  {% if perms.articles.delete_article%}
+    <a href="{% url "deletearticle" pk=article.id%}">
+      <button class="btn">Удалить</button></a>
+  {% endif %}
+</div>
+
+  <div class="detail">
+    <h1>{{ article.title }}</h1>
+    <p>{% autoescape off %}{{ article.text }}{% endautoescape %}</p>
+</div>
+{% endblock %}

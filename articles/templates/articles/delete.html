@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Удаление статьи
+{% endblock %}
+
+
+{% block content %}
+  {% if perms.articles.delete_article%}
+  <form method="post">
+    {% csrf_token %}
+    <h1 align="center">Уверены, что хотите удалить статью?</h1>
+    <h2><button class="btn btn-block">Удалить</button></h2>
+    {% else %}
+      <h1>Недостаточно прав, для совершения данной операции</h1>
+  {% endif %}
+{% endblock %}

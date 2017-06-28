@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Удаление новости
+{% endblock %}
+
+
+{% block content %}
+{% if perms.new.delete_new%}
+  <form method="post">
+    {% csrf_token %}
+    <h1 align="center">Уверены, что хотите удалить новость?</h1>
+    <h2><button class="btn btn-block">Удалить</button></h2>
+  </form>
+  {% else %}
+    <h1>Недостаточно прав, для совершения данной операции</h1>
+{% endif %}
+{% endblock %}

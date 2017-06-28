@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load mathfilters %}
+
+{% block title %}
+  Новости
+{% endblock %}
+
+{% block content %}
+  <div class="paginator">
+    {% for i in news.paginator.page_range %}
+      {% ifequal i news.number %}
+        <li class="paginator__item_current"><a href="{% url "page" page=i%}">{{ i }}</a></li>
+        {% else %}
+          <li class="paginator__item"><a href="{% url "page" page=i%}">{{ i }}</a></li>
+      {% endifequal %}
+    {% endfor %}
+  </div>
+  <br/>
+  {% for new in news %}
+    {% ifequal new.id|mod:2 0%}
+      <div class="new">
+          <h3 class="title"><a href="{% url "new" new_id=new.id%}" class="title__url">{{new.title}}</a></h3>
+        <!--{% if new.preview_picture %}
+          <div class="image">
+            <img class="new__img" src = "{{ new.preview_picture.url }}"/>
+          </div>-->
+        {% endif %}
+        <p>{% autoescape off %}{{ new.anons_text }}{% endautoescape %}</p>
+        <p>Ключевые слова: {{ new.tags }}</p>
+        <p>Понравилось: {{ new.like }}</p>
+      </div>
+      {% else %}
+      <div class="new2">
+          <h3 class="title"><a href="{% url "new" new_id=new.id%}" class="title__url">{{new.title}}</a></h3>
+        <!--{% if new.preview_picture %}
+          <div class="image">
+            <img class="new__img" src = "{{ new.preview_picture.url }}"/>
+          </div>
+        {% endif %}-->
+        <p>{% autoescape off %}{{ new.anons_text }}{% endautoescape %}</p>
+        <p>Ключевые слова: {{ new.tags }}</p>
+        <p>Понравилось: {{ new.like }}</p>
+      </div>
+    {% endifequal %}
+  {% endfor %}
+
+
+
+{% endblock %}

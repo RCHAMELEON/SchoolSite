@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+  Привелегии на сайте
+{% endblock %}
+
+{% block content %}
+  <div class="bar lft">
+    <h3>Ваши привелегии на сайте:</h3>
+    {% if user.is_authenticated %}
+      <p>Просматривать статьи, новости, документы</p>
+      <p>Отмечать новость, которая понравилась</p>
+    {% endif %}
+    {% if perms.documents.add_document%}
+      <p><a class="bar__link" href="{% url "adddocument" %}">
+        Добавить новый документ</a>
+      </p>
+    {% endif %}
+    {% if perms.articles.add_article%}
+      <p><a class="bar__link" href="{% url "addarticle" %}">
+        Добавить новую статью</a>
+      </p>
+    {% endif %}
+    {% if perms.articles.change_article%}
+      <p class="rigt_p" >Изменять статьи</p>
+    {% endif %}
+    {% if perms.articles.delete_article%}
+      <p class="rigt_p" >Удалять статьи</p>
+    {% endif %}
+    {% if perms.news.add_new%}
+      <p><a class="bar__link" href="{% url "addnew" %}">
+        Добавить новую новость</a>
+      </p>
+    {% endif %}
+    {% if perms.news.change_new%}
+      <p class="rigt_p" >Изменять новости</p>
+    {% endif %}
+    {% if perms.news.delete_new%}
+      <p class="rigt_p" >Удалять новости</p>
+    {% endif %}
+  </div>
+
+  {{ user.group }}
+{% endblock %}

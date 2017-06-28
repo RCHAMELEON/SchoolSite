@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
+
+{% block title%}
+Главная
+{% endblock %}
+
+{% block content %}
+	<script type="text/javascript" src="{% static "slick/jquery.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "slick/jquery-migrate.min.js"%}"></script>
+	<script type="text/javascript" src="{% static "slick/slick.min.js"%}"></script>
+		  <script type="text/javascript">
+	    $(document).ready(function(){
+	      $('.slide_slick').slick({
+			      autoplay: true,
+	          autoplaySpeed: 4000,
+		    });
+	    });
+	  </script>
+	<div class="board_slide">
+		<div class="container">
+			<h2> Последние добавленные новости <span style="padding-left:195px">Советы психолога школы</span></h1>
+      <div class="slide_slick lft">
+        {% for i in lastnews%}
+        <div >
+          <h3><a class="navigation__item-link" href="{% url "new" new_id=i.id%}" class="title__url">{{ i.title }}</a></h3>
+					<p>{% autoescape off %}{{ i.anons_text }}{% endautoescape %}</p>
+        </div>
+        {% endfor %}
+      </div>
+
+			<div class="slide_slick rigt">
+        {% for i in physical%}
+        <div >
+            <h3><a class="navigation__item-link" href="{% url "article" art_id=i.id%}">{{ i.title }}</a></h3>
+					<p>{% autoescape off %}{{ i.anons_text }}{% endautoescape %}</p>
+        </div>
+        {% endfor %}
+      </div>
+
+			<div class="kadr">
+					<h3><a class="navigation__item-link" href="/articles/article/7/">Кадровый состав учебного заведения</a></h3>
+			</div>
+
+			<div class="contact">
+					<h3><a  class="navigation__item-link" href="/articles/article/3/">Контакты образовательного учреждения</a></h3>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
